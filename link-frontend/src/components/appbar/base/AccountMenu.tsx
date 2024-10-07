@@ -31,12 +31,23 @@ export default function AccountMenu() {
                     <IconButton
                         onClick={handleClick}
                         size="small"
-                        sx={{ ml: 2 }}
+                        sx={{
+                            paddingX: 0,
+                            paddingY: 0,
+                            borderRadius: '90%', // Initially circular
+                            transition: 'border-radius 0.3s ease', // Smooth transition for the change
+                            '&:hover': {
+                                borderRadius: '10%', // Turns into a rounded square on hover
+                            },
+                        }}
                         aria-controls={open ? 'account-menu' : undefined}
                         aria-haspopup="true"
                         aria-expanded={open ? 'true' : undefined}
                     >
-                        <Avatar sx={{ width: 36, height: 36 }} variant="rounded">M</Avatar>
+                        <Avatar sx={{
+                            width: 36,
+                            height: 36,
+                        }} variant="rounded">M</Avatar>
                     </IconButton>
                 </Tooltip>
             </Box>
