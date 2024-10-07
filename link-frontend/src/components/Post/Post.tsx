@@ -6,6 +6,11 @@ import Avatar from '@mui/material/Avatar';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
+import IconButton from '@mui/material/IconButton';
+import PhotoIcon from '@mui/icons-material/Photo';
+import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
+import EventIcon from '@mui/icons-material/Event';
+import Typography from '@mui/material/Typography';
 
 const StyledCard = styled(Card)(({ theme }) => ({
     width: '100%',
@@ -14,7 +19,14 @@ const StyledCard = styled(Card)(({ theme }) => ({
     borderRadius: '8px', // Optional: Adjust border radius
 }));
 
-const Post = () => {
+const IconLabel = styled(Box)(({ theme }) => ({
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
+    margin: theme.spacing(1),
+}));
+
+const PostCard = () => {
     return (
         <StyledCard>
             <Box display="flex" alignItems="center" mb={2}>
@@ -35,6 +47,26 @@ const Post = () => {
                     }}
                 />
             </Box>
+            <Box display="flex" justifyContent="space-around" mb={2}>
+                <IconLabel>
+                    <IconButton color="primary">
+                        <PhotoIcon />
+                    </IconButton>
+                    <Typography variant="caption">Photo</Typography>
+                </IconLabel>
+                <IconLabel>
+                    <IconButton color="primary">
+                        <VideoCameraBackIcon />
+                    </IconButton>
+                    <Typography variant="caption">Video</Typography>
+                </IconLabel>
+                <IconLabel>
+                    <IconButton color="primary">
+                        <EventIcon />
+                    </IconButton>
+                    <Typography variant="caption">Event</Typography>
+                </IconLabel>
+            </Box>
             <Button variant="contained" color="primary" fullWidth>
                 Post
             </Button>
@@ -42,4 +74,4 @@ const Post = () => {
     );
 };
 
-export default Post;
+export default PostCard;

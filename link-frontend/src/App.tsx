@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Card from './components/Card/Card';
+import Card from './components/PostCard/PostCard';
 import { Routes, Route } from 'react-router-dom';
 
 import Signup from './pages/signup/Signup';

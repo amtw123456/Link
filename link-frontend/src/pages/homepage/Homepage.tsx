@@ -1,7 +1,7 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
 
 import AppBar from '../../components/NavBar/NavBar';
-import RecipeReviewCard from '../../components/Card/Card';
+import RecipeReviewCard from '../../components/PostCard/PostCard';
 import Post from '../../components/Post/Post';
 
 
