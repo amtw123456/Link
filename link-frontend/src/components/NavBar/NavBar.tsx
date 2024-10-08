@@ -12,7 +12,7 @@ const AppBar = () => {
 
     return (
         <nav className="sticky top-0 left-0 w-full z-50 py-1 bg-white border-b backdrop-blur-lg bg-opacity-80">
-            <div className="px-6 sm:px-6 lg:px-8">
+            <div className="mx-auto max-w-7xl">
                 <div className="relative flex items-center justify-between">
                     {/* Left: SearchBar */}
                     <div className="flex items-center w-1/3">

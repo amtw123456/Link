@@ -10,7 +10,7 @@ export default function SearchBar() {
                 placeholder="Search..."
                 size="small" // Use "small" to reduce height
                 sx={{
-                    width: '300px', // Set a specific width, adjust as needed
+                    width: '250px', // Set a specific width, adjust as needed
                     backgroundColor: '#f5f5f5',
                     borderRadius: 1,
                     '& .MuiOutlinedInput-root': {
