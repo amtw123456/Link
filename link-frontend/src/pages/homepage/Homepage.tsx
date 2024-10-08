@@ -5,6 +5,8 @@ import RecipeReviewCard from '../../components/PostCard/PostCard';
 import Post from '../../components/Post/Post';
 import ProfileCard from '../../components/ProfileCard/ProfileCard';
 import MediaControlCard from '../../components/MediaControlCard/MediaControlCard'
+import ConnectCard from '../../components/ConnectCard/ConnectCard';
+import FollowCard from '../../components/FollowCard/FollowCard';
 
 const Homepage = () => {
     return (
@@ -26,7 +28,8 @@ const Homepage = () => {
                     <div className="w-1/4 flex justify-end">
                         <div className='flex flex-col space-y-4'>
                             <MediaControlCard />
-                            <ProfileCard />
+                            <ConnectCard />
+                            <FollowCard />
                         </div>
                     </div>
                 </div>
