@@ -14,16 +14,26 @@ import Logout from '@mui/icons-material/Logout';
 import { Button, CardHeader } from '@mui/material';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { red } from '@mui/material/colors';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate from React Router
 
 export default function AccountMenu() {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
+    const navigate = useNavigate(); // Create a navigate function
+
     const handleClick = (event: React.MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);
     };
     const handleClose = () => {
         setAnchorEl(null);
     };
+
+
+
+    const handleProfileClick = () => {
+        navigate('/profile'); // Change the route to "/feed" when button is clicked
+    };
+
     return (
         <React.Fragment>
             <Box sx={{ display: 'flex', alignItems: 'center', textAlign: 'center' }}>
@@ -150,6 +160,7 @@ export default function AccountMenu() {
                             textTransform: 'none', // Prevent text from being transformed to uppercase
                             paddingX: 7
                         }}
+                        onClick={handleProfileClick}
                     >
                         View Profile
                     </Button>

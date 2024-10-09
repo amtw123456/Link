@@ -8,7 +8,7 @@ import Home from "./base/FeedBar";
 import { Button } from "@mui/material";
 import FeedBar from "./base/FeedBar";
 
-const AppBar = () => {
+const NavBar = () => {
 
     return (
         <nav className="sticky top-0 left-0 w-full z-50 py-1 bg-white border-b backdrop-blur-lg bg-opacity-80">
@@ -37,4 +37,4 @@ const AppBar = () => {
     );
 };
 
-export default AppBar;
+export default NavBar;

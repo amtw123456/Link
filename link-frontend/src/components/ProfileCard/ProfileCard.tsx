@@ -1,13 +1,15 @@
 import * as React from 'react';
-import { Card, CardContent, CardMedia, Avatar, Typography, Button, Box, Divider, List, ListItemButton, ListItemIcon, ListItemText } from '@mui/material';
-import { Home, People, Notifications, Event, Group, Settings } from '@mui/icons-material';
+import {
+    Card, CardContent, CardMedia, Avatar, Typography, Button, Box, Divider, List, ListItemButton, ListItemIcon, ListItemText
+} from '@mui/material';
+import { Home, People, Notifications, Settings } from '@mui/icons-material';
 
 const bannerImage = "https://via.placeholder.com/345x100"; // Placeholder banner image
 const avatarImage = "https://via.placeholder.com/100"; // Placeholder avatar image
 
 const ProfileCard: React.FC = () => {
     return (
-        <Card sx={{ maxWidth: 345, maxHeight: 800, borderRadius: 2, overflow: 'hidden', boxShadow: 2 }}>
+        <Card sx={{ borderRadius: 2, overflow: 'hidden', boxShadow: 2 }}>
             {/* Banner Image */}
             <CardMedia
                 component="img"
@@ -76,18 +78,6 @@ const ProfileCard: React.FC = () => {
                             <Notifications />
                         </ListItemIcon>
                         <ListItemText primary="Notifications" />
-                    </ListItemButton>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <Event />
-                        </ListItemIcon>
-                        <ListItemText primary="Events" />
-                    </ListItemButton>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            <Group />
-                        </ListItemIcon>
-                        <ListItemText primary="Groups" />
                     </ListItemButton>
                     <ListItemButton>
                         <ListItemIcon>
