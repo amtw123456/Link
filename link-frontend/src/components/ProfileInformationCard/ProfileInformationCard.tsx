@@ -5,6 +5,7 @@ import {
     ImageListItem
 } from '@mui/material';
 import { Home, People, Notifications, Settings } from '@mui/icons-material';
+import SpotifyPlaylistCard from '../SpotifyPlaylistCard/SpotifyPlaylistCard';
 
 const bannerImage = "https://via.placeholder.com/345x100"; // Placeholder banner image
 const avatarImage = "https://via.placeholder.com/100"; // Placeholder avatar image
@@ -109,6 +110,10 @@ const ProfileInformationCard: React.FC = () => {
                         <Typography variant="body2" color="textSecondary">Following</Typography>
                     </Box>
                 </Box>
+
+                <Divider sx={{ my: 2 }} />
+
+                <SpotifyPlaylistCard />
 
                 <Divider sx={{ my: 2 }} />
 

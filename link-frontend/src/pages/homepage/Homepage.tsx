@@ -7,6 +7,7 @@ import ProfileCard from '../../components/ProfileCard/ProfileCard';
 import MediaControlCard from '../../components/MediaControlCard/MediaControlCard'
 import ConnectCard from '../../components/ConnectCard/ConnectCard';
 import FollowCard from '../../components/FollowCard/FollowCard';
+import SpotifyPlaylistCard from '../../components/SpotifyPlaylistCard/SpotifyPlaylistCard';
 
 const Homepage = () => {
     return (
@@ -28,6 +29,7 @@ const Homepage = () => {
                     <div className="w-1/4 flex justify-end">
                         <div className='flex flex-col space-y-4'>
                             <MediaControlCard />
+                            <SpotifyPlaylistCard />
                             <ConnectCard />
                             <FollowCard />
                         </div>
