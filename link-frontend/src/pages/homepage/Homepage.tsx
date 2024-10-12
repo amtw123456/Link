@@ -29,7 +29,7 @@ const Homepage = () => {
                     <div className="w-1/4 flex justify-end">
                         <div className='flex flex-col space-y-4'>
                             <MediaControlCard />
-                            <SpotifyPlaylistCard />
+                            {/* <SpotifyPlaylistCard /> */}
                             <ConnectCard />
                             <FollowCard />
                         </div>
