@@ -10,6 +10,7 @@ import Profile from './pages/profile/Profile';
 import Settings from './pages/settings/Settings';
 
 function App() {
+
   return (
     <>
       <Routes>
