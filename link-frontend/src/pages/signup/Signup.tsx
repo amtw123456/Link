@@ -19,7 +19,7 @@ const Signup = () => {
     console.log(user)
     console.log(`${process.env.REACT_APP_API_URL}`)
     try {
-      const response = await axios.post(`${process.env.REACT_APP_API_URL}api/users/`, user);
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}api/auth/register`, user);
       console.log('User created:', response.data);
       // Handle successful signup (e.g., redirect or show a success message)
     } catch (error) {
