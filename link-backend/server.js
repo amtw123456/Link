@@ -2,6 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const postRoutes = require('./routes/postRoutes');
+const userRoutes = require('./routes/userRoutes');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -20,6 +21,7 @@ if (process.env.MONGO_URI) {
 
 // Routes
 app.use('/api/posts', postRoutes);
+app.use('/api/users', userRoutes);
 
 // Start the server
 app.listen(PORT, () => {
