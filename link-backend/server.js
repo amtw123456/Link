@@ -4,9 +4,10 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const postRoutes = require('./routes/postRoutes');
 const userRoutes = require('./routes/userRoutes');
+const authRoutes = require('./routes/authRoutes');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
 // Use CORS middleware
 app.use(cors());
@@ -26,6 +27,7 @@ if (process.env.MONGO_URI) {
 // Routes
 app.use('/api/posts', postRoutes);
 app.use('/api/users', userRoutes);
+app.use('/api/auth', authRoutes);
 
 // Start the server
 app.listen(PORT, () => {
