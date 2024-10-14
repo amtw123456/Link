@@ -8,8 +8,11 @@ import Home from "./base/FeedBar";
 import { Button } from "@mui/material";
 import FeedBar from "./base/FeedBar";
 
-const NavBar = () => {
+interface NavBarProps {
+    logout: () => void;
+}
 
+const NavBar = ({ logout }: NavBarProps) => {
     return (
         <nav className="sticky top-0 left-0 w-full z-50 py-1 bg-white border-b backdrop-blur-lg bg-opacity-80">
             <div className="mx-auto max-w-7xl">
@@ -28,7 +31,7 @@ const NavBar = () => {
                     <div className="flex items-center justify-end space-x-3 w-1/3">
                         <NotificationsMenu />
                         <Messages />
-                        <AccountMenu />
+                        <AccountMenu logout={logout} />
                     </div>
                 </div>
             </div>

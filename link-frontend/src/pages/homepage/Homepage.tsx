@@ -8,11 +8,13 @@ import MediaControlCard from '../../components/MediaControlCard/MediaControlCard
 import ConnectCard from '../../components/ConnectCard/ConnectCard';
 import FollowCard from '../../components/FollowCard/FollowCard';
 import SpotifyPlaylistCard from '../../components/SpotifyPlaylistCard/SpotifyPlaylistCard';
+import { useAuth } from '../../provider/AuthProvider';
 
 const Homepage = () => {
+    const { logout } = useAuth();
     return (
         <>
-            <NavBar />
+            <NavBar logout={logout} />
             <div className="mx-auto max-w-7xl flex justify-center">
                 <div className='flex flex-row mt-8'>
                     <div className="w-1/4 justify-start">

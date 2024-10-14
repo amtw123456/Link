@@ -16,7 +16,11 @@ import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { red } from '@mui/material/colors';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate from React Router
 
-export default function AccountMenu() {
+interface AccountMenuProps {
+    logout: () => void;
+}
+
+export default function AccountMenu({ logout }: AccountMenuProps) {
     const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
     const open = Boolean(anchorEl);
     const navigate = useNavigate(); // Create a navigate function
@@ -180,7 +184,7 @@ export default function AccountMenu() {
                     </Typography>
                 </MenuItem>
                 <Divider />
-                <MenuItem onClick={handleClose}>
+                <MenuItem onClick={logout}>
                     <ListItemIcon>
                         <Logout fontSize="small" />
                     </ListItemIcon>

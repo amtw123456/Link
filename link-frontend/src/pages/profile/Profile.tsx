@@ -8,11 +8,13 @@ import MediaControlCard from '../../components/MediaControlCard/MediaControlCard
 import ConnectCard from '../../components/ConnectCard/ConnectCard';
 import FollowCard from '../../components/FollowCard/FollowCard';
 import ProfileInformationCard from '../../components/ProfileInformationCard/ProfileInformationCard';
+import { useAuth } from '../../provider/AuthProvider';
 
 const Profile = () => {
+  const { logout } = useAuth();
   return (
     <>
-      <AppBar />
+      <AppBar logout={logout} />
       <div className="mx-auto max-w-7xl flex justify-center">
         <div className='flex flex-row mt-8'>
           <div className="w-2/5 justify-start">

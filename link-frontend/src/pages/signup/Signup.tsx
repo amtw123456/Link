@@ -1,4 +1,5 @@
 import { useState, ChangeEvent, FormEvent } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 import axios from 'axios';
 
 interface User {
@@ -9,19 +10,22 @@ interface User {
 const Signup = () => {
   const [user, setUser] = useState<User>({ email: '', password: '' });
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+
     e.preventDefault();
-    console.log(user)
-    console.log(`${process.env.REACT_APP_API_URL}`)
+
+
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}api/auth/register`, user);
-      console.log('User created:', response.data);
+
       // Handle successful signup (e.g., redirect or show a success message)
+      navigate('/homepage');
     } catch (error) {
       console.error('Error during signup:', error);
       // Handle error (e.g., show an error message)
