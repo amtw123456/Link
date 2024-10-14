@@ -21,6 +21,13 @@ interface ExpandMoreProps extends IconButtonProps {
     expand: boolean;
 }
 
+interface PostCardProps {
+    userId: string;
+    content: string;
+    email: string;
+}
+
+
 const ExpandMore = styled((props: ExpandMoreProps) => {
     const { expand, ...other } = props;
     return <IconButton {...other} />;
@@ -45,7 +52,7 @@ const ExpandMore = styled((props: ExpandMoreProps) => {
     ],
 }));
 
-export default function RecipeReviewCard() {
+const PostsCard: React.FC<PostCardProps> = ({ userId, content, email }) => {
     const [expanded, setExpanded] = React.useState(false);
 
     const handleExpandClick = () => {
@@ -76,9 +83,7 @@ export default function RecipeReviewCard() {
             />
             <CardContent>
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                    This impressive paella is a perfect party dish and a fun meal to cook
-                    together with your guests. Add 1 cup of frozen peas along with the mussels,
-                    if you like.
+                    {content}
                 </Typography>
             </CardContent>
             <CardActions disableSpacing>
@@ -130,3 +135,5 @@ export default function RecipeReviewCard() {
 
     );
 }
+
+export default PostsCard;

@@ -2,6 +2,7 @@ import { useState, ChangeEvent, FormEvent } from 'react';
 
 import NavBar from '../../components/NavBar/NavBar';
 import RecipeReviewCard from '../../components/PostCard/PostCard';
+import PostsCards from '../../components/PostCard/PostCard';
 import Post from '../../components/Post/Post';
 import ProfileCard from '../../components/ProfileCard/ProfileCard';
 import MediaControlCard from '../../components/MediaControlCard/MediaControlCard'
@@ -12,6 +13,31 @@ import { useAuth } from '../../provider/AuthProvider';
 
 const Homepage = () => {
     const { logout } = useAuth();
+
+    interface PostCardProps {
+        userId: string;
+        content: string;
+        email: string;
+    }
+
+    const postsData: PostCardProps[] = [
+        {
+            userId: 'user1',
+            content: 'This is my first post!',
+            email: 'user1@example.com',
+        },
+        {
+            userId: 'user2',
+            content: 'Hello, world! Excited to share my journey.',
+            email: 'user2@example.com',
+        },
+        {
+            userId: 'user3',
+            content: 'Just tried a new recipe. It was delicious!',
+            email: 'user3@example.com',
+        },
+    ]
+
     return (
         <>
             <NavBar logout={logout} />
@@ -22,11 +48,14 @@ const Homepage = () => {
                     </div>
                     <div className="w-2/4 flex flex-col justify-center items-center px-8 space-y-8">
                         <Post />
-                        <RecipeReviewCard />
-                        <RecipeReviewCard />
-                        <RecipeReviewCard />
-                        <RecipeReviewCard />
-                        <RecipeReviewCard />
+                        {postsData.map((post) => (
+                            <PostsCards
+                                key={post.userId} // Use a unique key
+                                userId={post.userId} // Use userId as post ID
+                                content={post.content}
+                                email={post.email}
+                            />
+                        ))}
                     </div>
                     <div className="w-1/4 flex justify-end">
                         <div className='flex flex-col space-y-4'>
