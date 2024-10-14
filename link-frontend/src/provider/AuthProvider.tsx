@@ -70,12 +70,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
                     setIsAuthenticated(true); // Token is valid
                 }
             }
-
-            // } else {
-            //     setIsAuthenticated(false); // No token means not authenticated
-            // }
         };
-        console.log('page change')
         checkTokenValidity();
     }, [token, location]);
 

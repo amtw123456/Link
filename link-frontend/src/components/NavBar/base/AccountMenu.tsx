@@ -32,8 +32,6 @@ export default function AccountMenu({ logout }: AccountMenuProps) {
         setAnchorEl(null);
     };
 
-
-
     const handleProfileClick = () => {
         navigate('/profile'); // Change the route to "/feed" when button is clicked
     };
