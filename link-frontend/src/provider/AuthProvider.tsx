@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
+import { useLocation } from "react-router-dom"; // To monitor page changes
 import Cookies from "js-cookie";
 import axios from "axios";
 
@@ -18,6 +19,8 @@ interface AuthProviderProps {
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
+    const location = useLocation(); // Hook to detect page changes
+
     const [token, setToken] = useState<string | null>(() => {
         // Get the token from cookies if it exists
         return Cookies.get("token") || null;
@@ -72,9 +75,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
             //     setIsAuthenticated(false); // No token means not authenticated
             // }
         };
-
+        console.log('page change')
         checkTokenValidity();
-    }, [token]);
+    }, [token, location]);
 
     return (
         <AuthContext.Provider value={{ isAuthenticated, login, logout }}>
