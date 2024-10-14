@@ -24,7 +24,6 @@ exports.registerUser = async (req, res) => {
 
 // User login controller
 exports.loginUser = async (req, res) => {
-    console.log(req.body)
     try {
         const { email, password } = req.body;
         const user = await User.findOne({ email });
@@ -38,9 +37,9 @@ exports.loginUser = async (req, res) => {
             return res.status(401).json({ error: 'Authentication failed' });
         }
         const token = jwt.sign({ userId: user._id, email: user.email }, 'SECRET', {
-            expiresIn: '30s',
+            expiresIn: '300s',
         });
-        res.status(200).json(token);
+        res.status(200).json({ userId: user._id, jwtToken: token, email: user.email });
     } catch (error) {
         res.status(500).json({ error: 'Login failed' });
     }

@@ -18,12 +18,12 @@ exports.getPosts = async (req, res) => {
 
 // Create a new post
 exports.createPost = async (req, res) => {
-    const { postName, postInformation, posterName } = req.body;
+    const { postContent, posterEmail, posterId } = req.body;
 
     const newPost = new Post({
-        postName,
-        postInformation,
-        posterName,
+        postContent,
+        posterEmail,
+        posterId,
     });
 
     try {

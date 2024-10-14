@@ -6,13 +6,19 @@ import axios from "axios";
 // Define the shape of your authentication context
 interface AuthContextType {
     isAuthenticated: boolean;
-    login: (userToken: string) => void;
+    login: (loginResponse: LoginResponse) => void;
     logout: () => void;
 }
 
 // Define the props for the AuthProvider component
 interface AuthProviderProps {
     children: ReactNode;
+}
+
+interface LoginResponse {
+    userId: string;   // Assuming userId is a string (ObjectId)
+    jwtToken: string;  // Assuming the JWT token is a string
+    email: string;     // Assuming email is a string
 }
 
 // Create the AuthContext with a default value of `undefined`
@@ -23,20 +29,24 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
     const [token, setToken] = useState<string | null>(() => {
         // Get the token from cookies if it exists
-        return Cookies.get("token") || null;
+        return Cookies.get("jwtToken") || null;
     });
 
     const [isAuthenticated, setIsAuthenticated] = useState<boolean>(!!token);
 
-    const login = (userToken: string) => {
-        setToken(userToken);
-        Cookies.set("token", userToken); // Store token in cookies
+    const login = (loginResponse: LoginResponse) => {
+        setToken(loginResponse.jwtToken);
+        Cookies.set("jwtToken", loginResponse.jwtToken); // Store token in cookies
+        Cookies.set("userId", loginResponse.userId); // Store token in cookies
+        Cookies.set("email", loginResponse.email); // Store token in cookies
         setIsAuthenticated(true); // Set authenticated state to true
     };
 
     const logout = () => {
         setToken(null);
-        Cookies.remove("token"); // Remove token from cookies
+        Cookies.remove("jwtToken"); // Store token in cookies
+        Cookies.remove("userId"); // Store token in cookies
+        Cookies.remove("email"); // Store token in cookies
         setIsAuthenticated(false); // Set authenticated state to false
     };
 

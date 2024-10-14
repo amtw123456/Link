@@ -14,7 +14,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true,
         minlength: 6, // Ensures password is at least 6 characters long
-    }
+    },
+    friendsList: {
+        type: [mongoose.Schema.Types.ObjectId], // Array of friend IDs
+        ref: 'User', // Assuming there is a User model
+        required: false, // Optional: if not all posts have a friends list
+    },
 }, {
     timestamps: true // Adds createdAt and updatedAt timestamps
 });

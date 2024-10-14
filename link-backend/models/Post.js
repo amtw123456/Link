@@ -2,15 +2,15 @@
 const mongoose = require('mongoose');
 
 const postSchema = new mongoose.Schema({
-    postName: {
+    postContent: {
         type: String,
         required: true,
     },
-    postInformation: {
+    posterEmail: {
         type: String,
         required: true,
     },
-    posterName: {
+    posterId: {
         type: String,
         required: true,
     },
@@ -22,11 +22,7 @@ const postSchema = new mongoose.Schema({
         type: [String], // Array of image URLs or paths
         required: false, // Optional: if not all posts have images
     },
-    friendsList: {
-        type: [mongoose.Schema.Types.ObjectId], // Array of friend IDs
-        ref: 'User', // Assuming there is a User model
-        required: false, // Optional: if not all posts have a friends list
-    },
+
 });
 
 module.exports = mongoose.model('Post', postSchema);

@@ -34,7 +34,17 @@ const Post = () => {
 
     const [token, setToken] = useState<string | null>(() => {
         // Get the token from cookies if it exists
-        return Cookies.get("token") || null;
+        return Cookies.get("jwtToken") || null;
+    });
+
+    const [userId, setUserId] = useState<string | null>(() => {
+        // Get the token from cookies if it exists
+        return Cookies.get("userId") || null;
+    });
+
+    const [email, setEmail] = useState<string | null>(() => {
+        // Get the token from cookies if it exists
+        return Cookies.get("email") || null;
     });
 
     // Function to handle form submission
@@ -42,13 +52,12 @@ const Post = () => {
         try {
             // Construct the post data
             const postData = {
-                postName: 'My First Post',              // You can change this to dynamic content if needed
-                postInformation: postContent,           // This should come from your input field or editor
-                posterName: 'John Doe',                 // Replace with actual user name if available
+                "postContent": postContent,           // This should come from your input field or editor
+                "posterEmail": email,                 // Replace with actual user name if available
+                "posterId": userId,                 // Replace with actual user name if available
             };
             console.log(postData)
             // Make the POST request to your API
-            console.log(`${process.env.REACT_APP_API_URL}api/posts`)
             const response = await axios.post(`${process.env.REACT_APP_API_URL}api/posts/`, postData, {
                 headers: {
                     'Authorization': `Bearer ${token}`, // Pass token if needed

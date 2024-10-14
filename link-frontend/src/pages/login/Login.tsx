@@ -23,6 +23,7 @@ const Login = () => {
     console.log(user);
     try {
       const response = await axios.post(`${process.env.REACT_APP_API_URL}api/auth/login`, user);
+      console.log(response.data)
       login(response.data);
       navigate('/homepage');
       // Handle successful login (e.g., save token, redirect, etc.)
