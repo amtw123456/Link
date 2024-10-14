@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useState } from 'react';
 import { styled } from '@mui/material/styles';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -11,12 +11,14 @@ import PhotoIcon from '@mui/icons-material/Photo';
 import VideoCameraBackIcon from '@mui/icons-material/VideoCameraBack';
 import EventIcon from '@mui/icons-material/Event';
 import Typography from '@mui/material/Typography';
+import axios from 'axios';
+import Cookies from "js-cookie";
 
 const StyledCard = styled(Card)(({ theme }) => ({
     width: '100%',
     padding: theme.spacing(2),
-    boxShadow: 'none', // Optional: Remove shadow for a flat look
-    borderRadius: '8px', // Optional: Adjust border radius
+    boxShadow: 'none',
+    borderRadius: '8px',
 }));
 
 const IconLabel = styled(Box)(({ theme }) => ({
@@ -26,7 +28,41 @@ const IconLabel = styled(Box)(({ theme }) => ({
     margin: theme.spacing(1),
 }));
 
-const PostCard = () => {
+const Post = () => {
+    const [postContent, setPostContent] = useState(''); // State to hold post content
+    const [error, setError] = useState<string | null>(null);
+
+    const [token, setToken] = useState<string | null>(() => {
+        // Get the token from cookies if it exists
+        return Cookies.get("token") || null;
+    });
+
+    // Function to handle form submission
+    const handleSubmit = async () => {
+        try {
+            // Construct the post data
+            const postData = {
+                postName: 'My First Post',              // You can change this to dynamic content if needed
+                postInformation: postContent,           // This should come from your input field or editor
+                posterName: 'John Doe',                 // Replace with actual user name if available
+            };
+            console.log(postData)
+            // Make the POST request to your API
+            console.log(`${process.env.REACT_APP_API_URL}api/posts`)
+            const response = await axios.post(`${process.env.REACT_APP_API_URL}api/posts/`, postData, {
+                headers: {
+                    'Authorization': `Bearer ${token}`, // Pass token if needed
+                },
+            });
+
+            console.log('Post created successfully:', response.data);
+            setPostContent(''); // Clear the input field after successful post
+        } catch (error) {
+            console.error('Error creating post:', error);
+            setError('Failed to create post!');
+        }
+    };
+
     return (
         <StyledCard>
             <Box display="flex" alignItems="center" mb={2}>
@@ -36,9 +72,11 @@ const PostCard = () => {
                     fullWidth
                     multiline
                     placeholder="What's on your mind?"
+                    value={postContent}
+                    onChange={(e) => setPostContent(e.target.value)} // Handle text input
                     sx={{
                         ml: 2,
-                        border: 'none', // No borders
+                        border: 'none',
                         '& .MuiOutlinedInput-root': {
                             '& fieldset': {
                                 border: 'none',
@@ -47,6 +85,7 @@ const PostCard = () => {
                     }}
                 />
             </Box>
+
             <Box display="flex" justifyContent="space-around" mb={2}>
                 <IconLabel>
                     <IconButton color="primary">
@@ -67,11 +106,19 @@ const PostCard = () => {
                     <Typography variant="caption">Event</Typography>
                 </IconLabel>
             </Box>
-            <Button variant="contained" color="primary" fullWidth>
+
+            {error && <Typography color="error">{error}</Typography>}
+
+            <Button
+                variant="contained"
+                color="primary"
+                fullWidth
+                onClick={handleSubmit} // Trigger the form submission
+            >
                 Post
             </Button>
         </StyledCard>
     );
 };
 
-export default PostCard;
+export default Post;

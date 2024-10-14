@@ -10,7 +10,9 @@ const app = express();
 const PORT = process.env.PORT || 3001;
 
 // Use CORS middleware
-app.use(cors());
+app.use(cors({
+    credentials: true, // Allows cookies to be sent
+}));
 
 // Middleware
 app.use(express.json());
