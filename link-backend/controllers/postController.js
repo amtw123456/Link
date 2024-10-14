@@ -45,6 +45,25 @@ exports.getPostById = async (req, res) => {
     }
 };
 
+exports.getPostsByUserId = async (req, res) => {
+    try {
+        const userId = req.params.userId; // Expecting user ID to be sent as a URL parameter
+        if (!userId) {
+            return res.status(400).json({ message: 'User ID is required' });
+        }
+
+        const posts = await Post.find({ posterId: userId }); // Find posts with the given posterId
+
+        if (posts.length === 0) {
+            return res.status(404).json({ message: 'No posts found for the provided user ID' });
+        }
+
+        res.status(200).json(posts); // Return the list of posts
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+};
+
 // Update a post by ID
 exports.updatePost = async (req, res) => {
     try {
