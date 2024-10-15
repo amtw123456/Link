@@ -10,9 +10,25 @@ import ConnectCard from '../../components/ConnectCard/ConnectCard';
 import FollowCard from '../../components/FollowCard/FollowCard';
 import SpotifyPlaylistCard from '../../components/SpotifyPlaylistCard/SpotifyPlaylistCard';
 import { useAuth } from '../../provider/AuthProvider';
+import Cookies from "js-cookie";
 
 const Homepage = () => {
     const { logout } = useAuth();
+
+    const [token, setToken] = useState<string | null>(() => {
+        // Get the token from cookies if it exists
+        return Cookies.get("jwtToken") || null;
+    });
+
+    const [userId, setUserId] = useState<string | null>(() => {
+        // Get the token from cookies if it exists
+        return Cookies.get("userId") || null;
+    });
+
+    const [email, setEmail] = useState<string | null>(() => {
+        // Get the token from cookies if it exists
+        return Cookies.get("email") || null;
+    });
 
     interface PostCardProps {
         userId: string;
@@ -44,7 +60,7 @@ const Homepage = () => {
             <div className="mx-auto max-w-7xl flex justify-center">
                 <div className='flex flex-row mt-8'>
                     <div className="w-1/4 justify-start">
-                        <ProfileCard />
+                        <ProfileCard email={email} />
                     </div>
                     <div className="w-2/4 flex flex-col justify-center items-center px-8 space-y-8">
                         <Post />

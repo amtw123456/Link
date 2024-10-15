@@ -6,7 +6,7 @@ const postController = require('../controllers/postController');
 
 // Routes
 router.get('/helloWorld', authMiddleware.verifyToken, postController.helloWorld);           // Get all posts
-// router.get('/', postController.getPosts);
+
 router.post('/', authMiddleware.verifyToken, postController.createPost);        // Create a new post
 
 router.get('/:id', authMiddleware.verifyToken, postController.getPostById);     // Get a post by ID

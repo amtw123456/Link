@@ -7,7 +7,11 @@ import { Home, People, Notifications, Settings } from '@mui/icons-material';
 const bannerImage = "https://via.placeholder.com/345x100"; // Placeholder banner image
 const avatarImage = "https://via.placeholder.com/100"; // Placeholder avatar image
 
-const ProfileCard: React.FC = () => {
+interface ProfileCardProps {
+    email: string | null;
+}
+
+const ProfileCard: React.FC<ProfileCardProps> = ({ email }) => {
     return (
         <Card sx={{ borderRadius: 2, overflow: 'hidden', boxShadow: 2 }}>
             {/* Banner Image */}
@@ -30,7 +34,7 @@ const ProfileCard: React.FC = () => {
             <CardContent sx={{ textAlign: 'center' }}>
                 {/* Name and Title */}
                 <Typography variant="h6" fontWeight="bold">
-                    John Doe
+                    {email}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
                     Software Engineer at Example Corp
