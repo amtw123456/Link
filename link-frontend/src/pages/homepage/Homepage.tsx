@@ -1,4 +1,4 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
+import { useState, ChangeEvent, FormEvent, useEffect } from 'react';
 
 import NavBar from '../../components/NavBar/NavBar';
 import RecipeReviewCard from '../../components/PostCard/PostCard';
@@ -11,9 +11,20 @@ import FollowCard from '../../components/FollowCard/FollowCard';
 import SpotifyPlaylistCard from '../../components/SpotifyPlaylistCard/SpotifyPlaylistCard';
 import { useAuth } from '../../provider/AuthProvider';
 import Cookies from "js-cookie";
+import axios from 'axios';
+
+interface PostCardProps {
+    _id: string;
+    posterId: string;
+    postContent: string;
+    posterEmail: string;
+}
 
 const Homepage = () => {
     const { logout } = useAuth();
+    const [postsData, setPostsData] = useState<PostCardProps[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
 
     const [token, setToken] = useState<string | null>(() => {
         // Get the token from cookies if it exists
@@ -30,29 +41,27 @@ const Homepage = () => {
         return Cookies.get("email") || null;
     });
 
-    interface PostCardProps {
-        userId: string;
-        content: string;
-        email: string;
-    }
+    useEffect(() => {
+        const fetchPosts = async () => {
+            try {
+                const response = await axios.get(`${process.env.REACT_APP_API_URL}api/posts/by-user/${userId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${token}`, // Pass token if needed
+                    },
+                });
+                setPostsData(response.data);
+                setLoading(false);
+            } catch (err) {
+                setError('Failed to fetch posts');
+                setLoading(false);
+            }
+        };
 
-    const postsData: PostCardProps[] = [
-        {
-            userId: 'user1',
-            content: 'This is my first post!',
-            email: 'user1@example.com',
-        },
-        {
-            userId: 'user2',
-            content: 'Hello, world! Excited to share my journey.',
-            email: 'user2@example.com',
-        },
-        {
-            userId: 'user3',
-            content: 'Just tried a new recipe. It was delicious!',
-            email: 'user3@example.com',
-        },
-    ]
+        fetchPosts();
+    }, []);
+
+    if (loading) return <p>Loading...</p>;
+    if (error) return <p>{error}</p>;
 
     return (
         <>
@@ -66,10 +75,11 @@ const Homepage = () => {
                         <Post />
                         {postsData.map((post) => (
                             <PostsCards
-                                key={post.userId} // Use a unique key
-                                userId={post.userId} // Use userId as post ID
-                                content={post.content}
-                                email={post.email}
+                                key={post._id} // Assuming _id is the unique identifier for the post
+                                id={post._id}
+                                userId={post.posterId} // Using posterId for the user who made the post
+                                content={post.postContent}
+                                email={post.posterEmail} // Assuming there's a posterEmail field
                             />
                         ))}
                     </div>

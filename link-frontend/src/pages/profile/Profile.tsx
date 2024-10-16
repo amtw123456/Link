@@ -61,7 +61,7 @@ const Profile = () => {
   return (
     <>
       <AppBar logout={logout} />
-      <div className="mx-auto max-w-7xl flex justify-center">
+      <div className="mx-auto bg-red-400 max-w-7xl flex justify-center">
         <div className="flex flex-row mt-8">
           <div className="w-2/5 justify-start">
             <ProfileInformationCard />
@@ -71,6 +71,7 @@ const Profile = () => {
             {postsData.map((post) => (
               <PostsCards
                 key={post._id} // Assuming _id is the unique identifier for the post
+                id={post._id}
                 userId={post.posterId} // Using posterId for the user who made the post
                 content={post.postContent}
                 email={post.posterEmail} // Assuming there's a posterEmail field

@@ -22,6 +22,7 @@ interface ExpandMoreProps extends IconButtonProps {
 }
 
 interface PostCardProps {
+    id: string;
     userId: string;
     content: string;
     email: string;

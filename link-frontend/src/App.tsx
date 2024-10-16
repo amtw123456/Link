@@ -25,6 +25,7 @@ function App() {
           <Route element={<UnauthenticatedRoutes />}>
             <Route path="/login" element={<Signin />} />
             <Route path="/signup" element={<Signup />} />
+            <Route path="*" element={<Signin />} />
           </Route>
         </Routes>
       </AuthProvider>
