@@ -9,9 +9,10 @@ const avatarImage = "https://via.placeholder.com/100"; // Placeholder avatar ima
 
 interface ProfileCardProps {
     email: string | null;
+    numberOfPosts?: number | null;
 }
 
-const ProfileCard: React.FC<ProfileCardProps> = ({ email }) => {
+const ProfileCard: React.FC<ProfileCardProps> = ({ email, numberOfPosts }) => {
     return (
         <Card sx={{ borderRadius: 2, overflow: 'hidden', boxShadow: 2 }}>
             {/* Banner Image */}
@@ -48,16 +49,13 @@ const ProfileCard: React.FC<ProfileCardProps> = ({ email }) => {
                 {/* Stats */}
                 <Box display="flex" justifyContent="space-around" mt={2}>
                     <Box textAlign="center">
-                        <Typography fontWeight="bold">256</Typography>
+                        <Typography fontWeight="bold">{numberOfPosts}</Typography>
                         <Typography variant="body2" color="textSecondary">Posts</Typography>
                     </Box>
-                    <Box textAlign="center">
-                        <Typography fontWeight="bold">2.5K</Typography>
-                        <Typography variant="body2" color="textSecondary">Followers</Typography>
-                    </Box>
+
                     <Box textAlign="center">
                         <Typography fontWeight="bold">365</Typography>
-                        <Typography variant="body2" color="textSecondary">Following</Typography>
+                        <Typography variant="body2" color="textSecondary">Friends</Typography>
                     </Box>
                 </Box>
 

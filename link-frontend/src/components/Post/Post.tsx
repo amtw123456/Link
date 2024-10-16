@@ -66,6 +66,7 @@ const Post = () => {
 
             console.log('Post created successfully:', response.data);
             setPostContent(''); // Clear the input field after successful post
+            window.location.reload();
         } catch (error) {
             console.error('Error creating post:', error);
             setError('Failed to create post!');

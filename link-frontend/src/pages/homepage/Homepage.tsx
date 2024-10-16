@@ -46,14 +46,15 @@ const Homepage = () => {
             try {
                 const response = await axios.get(`${process.env.REACT_APP_API_URL}api/posts/by-user/${userId}`, {
                     headers: {
-                        'Authorization': `Bearer ${token}`, // Pass token if needed
+                        Authorization: `Bearer ${token}`, // Pass token if needed
                     },
                 });
                 setPostsData(response.data);
-                setLoading(false);
             } catch (err) {
-                setError('Failed to fetch posts');
-                setLoading(false);
+                console.error('Failed to fetch posts', err);
+                setError(''); // Instead of displaying an error, set it to an empty string or handle it accordingly
+            } finally {
+                setLoading(false); // Ensure the loading state is updated
             }
         };
 
@@ -69,9 +70,9 @@ const Homepage = () => {
             <div className="mx-auto max-w-7xl flex justify-center">
                 <div className='flex flex-row mt-8'>
                     <div className="w-1/4 justify-start">
-                        <ProfileCard email={email} />
+                        <ProfileCard email={email} numberOfPosts={postsData.length} />
                     </div>
-                    <div className="w-2/4 flex flex-col justify-center items-center px-8 space-y-8">
+                    <div className="w-2/4 flex-col justify-center items-center px-8 space-y-8">
                         <Post />
                         {postsData.map((post) => (
                             <PostsCards

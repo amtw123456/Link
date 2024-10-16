@@ -13,6 +13,8 @@ router.get('/:id', authMiddleware.verifyToken, postController.getPostById);     
 
 router.get('/by-user/:userId', authMiddleware.verifyToken, postController.getPostsByUserId);
 
+// router.get('/by-freinds/:userId', authMiddleware.verifyToken, postController.getPostsByUserId);
+
 router.put('/:id', authMiddleware.verifyToken, postController.updatePost);      // Update a post by ID
 
 router.delete('/:id', authMiddleware.verifyToken, postController.deletePost);   // Delete a post by ID

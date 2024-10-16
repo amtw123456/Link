@@ -61,7 +61,13 @@ const itemData = [
     },
 ];
 
-const ProfileInformationCard: React.FC = () => {
+
+interface ProfileInformationCardProps {
+    email: string | null;
+    numberOfPosts: number | null;
+}
+
+const ProfileInformationCard: React.FC<ProfileInformationCardProps> = ({ email, numberOfPosts }) => {
     return (
         <Card sx={{ borderRadius: 2, overflow: 'hidden', boxShadow: 2 }}>
             {/* Banner Image */}
@@ -84,7 +90,7 @@ const ProfileInformationCard: React.FC = () => {
             <CardContent sx={{ textAlign: 'center' }}>
                 {/* Name and Title */}
                 <Typography variant="h6" fontWeight="bold">
-                    John Doe
+                    {email}
                 </Typography>
                 <Typography variant="body2" color="textSecondary">
                     Software Engineer at Example Corp
@@ -98,16 +104,12 @@ const ProfileInformationCard: React.FC = () => {
                 {/* Stats */}
                 <Box display="flex" justifyContent="space-around" mt={2}>
                     <Box textAlign="center">
-                        <Typography fontWeight="bold">256</Typography>
+                        <Typography fontWeight="bold">{numberOfPosts}</Typography>
                         <Typography variant="body2" color="textSecondary">Posts</Typography>
                     </Box>
                     <Box textAlign="center">
-                        <Typography fontWeight="bold">2.5K</Typography>
-                        <Typography variant="body2" color="textSecondary">Followers</Typography>
-                    </Box>
-                    <Box textAlign="center">
                         <Typography fontWeight="bold">365</Typography>
-                        <Typography variant="body2" color="textSecondary">Following</Typography>
+                        <Typography variant="body2" color="textSecondary">Friends</Typography>
                     </Box>
                 </Box>
 
