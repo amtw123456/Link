@@ -8,7 +8,7 @@ exports.verifyToken = (req, res, next) => {
     }
 
     try {
-        const decoded = jwt.verify(token, 'SECRET'); // Use the same secret as used for signing
+        const decoded = jwt.verify(token, process.env.SECRET); // Use the same secret as used for signing
         req.user = decoded; // Attach the decoded token data (user info) to the request object
         next(); // Proceed to the next middleware or route handler
     } catch (error) {

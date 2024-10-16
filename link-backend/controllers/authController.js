@@ -36,7 +36,7 @@ exports.loginUser = async (req, res) => {
         if (!passwordMatch) {
             return res.status(401).json({ error: 'Authentication failed' });
         }
-        const token = jwt.sign({ userId: user._id, email: user.email }, 'SECRET', {
+        const token = jwt.sign({ userId: user._id, email: user.email }, process.env.SECRET, {
             expiresIn: '300s',
         });
         res.status(200).json({ userId: user._id, jwtToken: token, email: user.email });
@@ -52,7 +52,7 @@ exports.verifyToken = (req, res) => {
     }
 
     try {
-        const decoded = jwt.verify(token, 'SECRET'); // Use the same secret as used for signing
+        const decoded = jwt.verify(token, process.env.SECRET); // Use the same secret as used for signing
         req.user = decoded; // Attach the decoded token data (user info) to the request object
         // Return true if token is valid
         return res.status(200).json({ valid: true, user: req.user });
