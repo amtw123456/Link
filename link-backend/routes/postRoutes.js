@@ -5,7 +5,7 @@ const authMiddleware = require('../middlewares/authMiddleware')
 const postController = require('../controllers/postController');
 
 // Routes
-router.get('/helloWorld', authMiddleware.verifyToken, postController.helloWorld);           // Get all posts
+router.get('/helloWorld', postController.helloWorld);           // Get all posts
 
 router.post('/', authMiddleware.verifyToken, postController.createPost);        // Create a new post
 
