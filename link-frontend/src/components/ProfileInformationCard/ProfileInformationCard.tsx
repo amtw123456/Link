@@ -156,8 +156,6 @@ const ProfileInformationCard: React.FC = () => {
                     </ImageList>
                 </Box>
 
-
-
             </CardContent>
         </Card>
     );

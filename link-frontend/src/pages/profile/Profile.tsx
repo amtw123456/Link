@@ -61,12 +61,12 @@ const Profile = () => {
   return (
     <>
       <AppBar logout={logout} />
-      <div className="mx-auto bg-red-400 max-w-7xl flex justify-center">
-        <div className="flex flex-row mt-8">
+      <div className="mx-auto max-w-7xl justify-center">
+        <div className="flex max-w flex-row mt-8 space-x-8">
           <div className="w-2/5 justify-start">
             <ProfileInformationCard />
           </div>
-          <div className="w-3/5 flex-col justify-center items-center px-8 space-y-8">
+          <div className="w-3/5 flex-col justify-center items-center space-y-8">
             <Post />
             {postsData.map((post) => (
               <PostsCards
