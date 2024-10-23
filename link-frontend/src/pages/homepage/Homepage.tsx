@@ -9,6 +9,7 @@ import MediaControlCard from '../../components/MediaControlCard/MediaControlCard
 import ConnectCard from '../../components/ConnectCard/ConnectCard';
 import FollowCard from '../../components/FollowCard/FollowCard';
 import SpotifyPlaylistCard from '../../components/SpotifyPlaylistCard/SpotifyPlaylistCard';
+import CircularProgress from '@mui/material/CircularProgress';
 import { useAuth } from '../../provider/AuthProvider';
 import Cookies from "js-cookie";
 import axios from 'axios';
@@ -61,7 +62,11 @@ const Homepage = () => {
         fetchPosts();
     }, []);
 
-    if (loading) return <p>Loading...</p>;
+    if (loading) return (
+        <div className='flex justify-center items-center h-screen' >
+            <CircularProgress size="120px" color="secondary" />
+        </div>
+    )
     if (error) return <p>{error}</p>;
 
     return (
