@@ -28,7 +28,12 @@ const IconLabel = styled(Box)(({ theme }) => ({
     margin: theme.spacing(1),
 }));
 
-const Post = () => {
+
+interface PostProps {
+    setDidUserPost: (didPost: boolean) => void; // Callback function that takes a boolean and returns void
+
+}
+const Post: React.FC<PostProps> = ({ setDidUserPost }) => {
     const [postContent, setPostContent] = useState(''); // State to hold post content
     const [error, setError] = useState<string | null>(null);
 
@@ -51,6 +56,7 @@ const Post = () => {
     const handleSubmit = async () => {
         try {
             // Construct the post data
+
             const postData = {
                 "postContent": postContent,           // This should come from your input field or editor
                 "posterEmail": email,                 // Replace with actual user name if available
@@ -66,7 +72,7 @@ const Post = () => {
 
             console.log('Post created successfully:', response.data);
             setPostContent(''); // Clear the input field after successful post
-            window.location.reload();
+            setDidUserPost(true)
         } catch (error) {
             console.error('Error creating post:', error);
             setError('Failed to create post!');

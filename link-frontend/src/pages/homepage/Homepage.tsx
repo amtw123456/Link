@@ -24,7 +24,9 @@ interface PostCardProps {
 const Homepage = () => {
     const { logout } = useAuth();
     const [postsData, setPostsData] = useState<PostCardProps[]>([]);
-    const [loading, setLoading] = useState(true);
+    const [didUserPost, setDidUserPost] = useState<Boolean>(false);
+    const [isPageloading, setisPageLoading] = useState<Boolean>(true);
+    const [isPostsDataBeingFetched, setIsPostsDataBeingFeteched] = useState<Boolean>(false);
     const [error, setError] = useState('');
 
     const [token, setToken] = useState<string | null>(() => {
@@ -42,27 +44,38 @@ const Homepage = () => {
         return Cookies.get("email") || null;
     });
 
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                const response = await axios.get(`${process.env.REACT_APP_API_URL}api/posts/by-user/${userId}`, {
-                    headers: {
-                        Authorization: `Bearer ${token}`, // Pass token if needed
-                    },
-                });
-                setPostsData(response.data);
-            } catch (err) {
-                console.error('Failed to fetch posts', err);
-                setError(''); // Instead of displaying an error, set it to an empty string or handle it accordingly
-            } finally {
-                setLoading(false); // Ensure the loading state is updated
-            }
-        };
+    const fetchPosts = async () => {
+        setIsPostsDataBeingFeteched(true)
+        try {
+            const response = await axios.get(`${process.env.REACT_APP_API_URL}api/posts/by-user/${userId}`, {
+                headers: {
+                    Authorization: `Bearer ${token}`, // Pass token if needed
+                },
+            });
+            setPostsData(response.data);
+        } catch (err) {
+            console.error('Failed to fetch posts', err);
+            setError(''); // Instead of displaying an error, set it to an empty string or handle it accordingly
+        } finally {
+            setIsPostsDataBeingFeteched(false)
+        }
+    };
 
+    useEffect(() => {
         fetchPosts();
+        setisPageLoading(false);
     }, []);
 
-    if (loading) return (
+    useEffect(() => {
+        fetchPosts();
+    }, [didUserPost]);
+
+    useEffect(() => {
+        setDidUserPost(false)
+        // setIsPostsDataBeingFeteched(false)
+    }, [postsData]);
+
+    if (isPageloading) return (
         <div className='flex justify-center items-center h-screen' >
             <CircularProgress size="120px" color="secondary" />
         </div>
@@ -78,16 +91,24 @@ const Homepage = () => {
                         <ProfileCard email={email} numberOfPosts={postsData.length} />
                     </div>
                     <div className="w-2/4 flex-col justify-center items-center px-8 space-y-8">
-                        <Post />
-                        {postsData.map((post) => (
-                            <PostsCards
-                                key={post._id} // Assuming _id is the unique identifier for the post
-                                id={post._id}
-                                userId={post.posterId} // Using posterId for the user who made the post
-                                content={post.postContent}
-                                email={post.posterEmail} // Assuming there's a posterEmail field
-                            />
-                        ))}
+                        <Post setDidUserPost={setDidUserPost} />
+                        {
+                            !isPostsDataBeingFetched ? (
+                                postsData.map((post) => (
+                                    <PostsCards
+                                        key={post._id} 
+                                        id={post._id}
+                                        userId={post.posterId} 
+                                        content={post.postContent}
+                                        email={post.posterEmail}
+                                    />
+                                ))
+                            ) : (
+                                <div className='flex justify-center'>
+                                    <CircularProgress />
+                                </div>
+                            )
+                        }
                     </div>
                     <div className="w-1/4 flex justify-end">
                         <div className='flex flex-col space-y-4'>

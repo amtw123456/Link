@@ -18,6 +18,7 @@ interface PostCardProps {
 const Profile = () => {
   const { logout } = useAuth();
   const [postsData, setPostsData] = useState<PostCardProps[]>([]);
+  const [didUserPost, setDidUserPost] = useState<Boolean>(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
 
@@ -69,7 +70,7 @@ const Profile = () => {
             <ProfileInformationCard email={email} numberOfPosts={postsData.length} />
           </div>
           <div className="w-3/5 flex-col justify-center items-center space-y-8">
-            <Post />
+            <Post setDidUserPost={setDidUserPost} />
             {postsData.map((post) => (
               <PostsCards
                 key={post._id} // Assuming _id is the unique identifier for the post
