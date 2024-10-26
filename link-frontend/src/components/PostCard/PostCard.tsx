@@ -99,27 +99,21 @@ const PostsCard: React.FC<PostCardProps> = ({ id, userId, content, email }) => {
             // Handle success response
             if (response.status === 200) {
                 console.log("Post deleted successfully");
-                // You can also trigger a success notification or state update here
             }
 
-        } catch (err: any) { // Make sure 'err' can be typed properly in TypeScript
+        } catch (err: any) {
             if (axios.isAxiosError(err)) {
-                // Axios-specific error handling
                 if (err.response) {
-                    // Server responded with a status other than 2xx
                     console.error(`Error: ${err.response.status} - ${err.response.data}`);
                     alert(`Error: ${err.response.status} - ${err.response.data.message || 'Failed to delete post.'}`);
                 } else if (err.request) {
-                    // No response was received from the server
                     console.error('No response received from the server:', err.request);
                     alert('No response received from the server. Please try again.');
                 } else {
-                    // Something went wrong during request setup
                     console.error('Error setting up request:', err.message);
                     alert(`Request error: ${err.message}`);
                 }
             } else {
-                // Non-Axios error handling
                 console.error('An unexpected error occurred:', err);
                 alert('An unexpected error occurred. Please try again.');
             }
